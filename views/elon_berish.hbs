@@ -1,0 +1,92 @@
+<h2 class="text-center">E'lon berish</h2>
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 border">
+        <h4>Vaqt va yo'nalishni tanlash</h4>
+        <form action="/adminga_elon_yuborish" method="POST">
+        <div class="row">
+            
+            <div class="form-group col-6">
+            <label for="date">O'tkaziladigan sanani kiriting:</label>
+            <input type="date" class="form-control" name="date" placeholder="dd-mm-yyyy" id="date" required="true">
+            </div>
+
+            <div class="form-group col-4">
+            <label for="time">vaqtni kiriting:</label>
+            <input type="time" class="form-control" name="time" placeholder="14:00" id="time" required="true">
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group ">
+                <label for="yunalish">Yo'nalishni belgilang:</label>
+                <select class="form-control masterSelect" id="yunalish" name="yunalish">
+                    <option value="0">Information Technologies</option>
+                    <option value="1">Grafik Design</option>
+                    <option value="2">SMM</option>
+                </select>
+                </div>              
+            </div>
+
+            <div class="col-6">
+                <div class="form-group hiddenOptions">
+                <label for="ichki_yunalish">Ichki Yo'nalish:</label>
+                
+                <select class="form-control" id="ichki_yunalish" name="ichki_yunalish">
+                    <option value="1">Node.js</option>
+                    <option value="2">Python</option>
+                    <option value="3">Flutter</option>
+                </select>
+
+                <select class="form-control" id="ichki_yunalish" name="ichki_yunalish">
+                    <option value="4">Grafik pro</option>
+                    <option value="5">Adobe illustrator</option>
+                    <option value="6">Photoshop</option>
+                </select>
+
+                <select class="form-control" id="ichki_yunalish" name="ichki_yunalish">
+                    <option value="7">SMM</option>
+                    <option value="8">Marketing</option>
+                </select>
+                
+                </div>              
+            </div>
+        </div>
+
+        <div class="form-check-inline">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio" required="true" value="online">Online
+        </label>
+        </div>
+        <div class="form-check-inline">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio" required="true" value="offline">Offline
+        </label>
+        </div>    
+
+        <h5 class="mt-5">Tashkilotchi</h5>
+
+        <div class="form-group">
+            <label for="fullname">Ism Sharif:</label>
+            <input type="text" class="form-control" name="fullname" placeholder="Ism Sharif" id="fullname" required="true">
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Telefon raqam:</label>
+            <input type="text" class="form-control" name="phone" placeholder="+998" id="phone" required="true">
+        </div>
+
+        <h5 class="mt-4">Post</h5>
+
+        <input type="file" class="form-control-file border" required="true">
+
+        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>
+
+
