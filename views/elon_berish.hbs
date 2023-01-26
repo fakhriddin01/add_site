@@ -4,7 +4,8 @@
     <div class="col-4"></div>
     <div class="col-4 border">
         <h4>Vaqt va yo'nalishni tanlash</h4>
-        <form action="/adminga_elon_yuborish" method="POST">
+        <form action="/adminga_elon_yuborish" method="POST" enctype="multipart/form-data">
+        
         <div class="row">
             
             <div class="form-group col-6">
@@ -18,7 +19,7 @@
             </div>
             <div class="col-2"></div>
         </div>
-
+                
         <div class="row">
             <div class="col-6">
                 <div class="form-group ">
@@ -36,20 +37,20 @@
                 <label for="ichki_yunalish">Ichki Yo'nalish:</label>
                 
                 <select class="form-control" id="ichki_yunalish" name="ichki_yunalish">
-                    <option value="1">Node.js</option>
-                    <option value="2">Python</option>
-                    <option value="3">Flutter</option>
+                    <option value="0">Node.js</option>
+                    <option value="1">Python</option>
+                    <option value="2">Flutter</option>
                 </select>
 
                 <select class="form-control" id="ichki_yunalish" name="ichki_yunalish">
-                    <option value="4">Grafik pro</option>
-                    <option value="5">Adobe illustrator</option>
-                    <option value="6">Photoshop</option>
+                    <option value="0">Grafik pro</option>
+                    <option value="1">Adobe illustrator</option>
+                    <option value="2">Photoshop</option>
                 </select>
 
                 <select class="form-control" id="ichki_yunalish" name="ichki_yunalish">
-                    <option value="7">SMM</option>
-                    <option value="8">Marketing</option>
+                    <option value="0">SMM</option>
+                    <option value="1">Marketing</option>
                 </select>
                 
                 </div>              
@@ -81,7 +82,7 @@
 
         <h5 class="mt-4">Post</h5>
 
-        <input type="file" class="form-control-file border" required="true">
+        <input type="file" class="form-control-file border" required="true" name="image">
 
         <button type="submit" class="btn btn-primary mt-4">Submit</button>
         </form>
