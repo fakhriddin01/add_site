@@ -7,6 +7,8 @@ router
     .get('/login', controller.OPEN_LOGIN)
     .get('/elon_berish', controller.OPEN_ELON_BERISH)
     .post('/adminga_elon_yuborish', controller.SENT_ELON)
+    .get('/elonlar', controller.ELONLAR)
+  
 
 
 

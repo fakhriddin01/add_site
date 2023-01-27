@@ -1,53 +1,57 @@
 [
-    {
-        "id": "2d33b003-6725-4f1c-b634-d9c658b30200",
-        "date": "2023-01-25",
-        "time": "15:00",
-        "yunalish": "SMM",
-        "ichki_yunalish": "Marketing",
-        "format": "online",
-        "fullname": "Abd Fakh",
-        "phone": "+998900"
-    },
-    {
-        "id": "a3c041a2-ac71-4594-9b45-5ca081d8e8de",
-        "date": "2023-01-31",
-        "time": "10:00",
-        "yunalish": "Information Technologies",
-        "ichki_yunalish": "Node.js",
-        "format": "online",
-        "fullname": "John Doe",
-        "phone": "+998901200000"
-    },
-    {
-        "id": "0a14bd9b-219b-44ce-844d-f538e8c27ad8",
-        "date": "2023-01-30",
-        "time": "14:00",
-        "yunalish": "Information Technologies",
-        "ichki_yunalish": "Flutter",
-        "format": "offline",
-        "fullname": "Smith ",
-        "phone": "+998907001111"
-    },
-    {
-        "id": "bbf12038-621a-4882-9ce0-60a4cc27edde",
-        "date": "2023-01-30",
-        "time": "14:00",
-        "yunalish": "Information Technologies",
-        "ichki_yunalish": "Flutter",
-        "format": "offline",
-        "fullname": "Smith ",
-        "phone": "+998907001111"
-    },
-    {
-        "id": "dcc27dc1-cf3a-4c7d-9d55-230b6996d40f",
-        "date": "2023-01-30",
-        "time": "14:00",
-        "yunalish": "Information Technologies",
-        "ichki_yunalish": "Flutter",
-        "format": "offline",
-        "fullname": "Smith ",
-        "phone": "+998907001111",
-        "image": "78Smith.png"
-    }
+  {
+    "id": "2d33b003-6725-4f1c-b634-d9c658b30200",
+    "date": "2023-01-25",
+    "time": "15:00",
+    "yunalish": "SMM",
+    "ichki_yunalish": "Marketing",
+    "format": "online",
+    "fullname": "Abd Fakh",
+    "phone": "+998900",
+    "image": "78Smith.png"
+  },
+  {
+    "id": "a3c041a2-ac71-4594-9b45-5ca081d8e8de",
+    "date": "2023-01-31",
+    "time": "10:00",
+    "yunalish": "Information Technologies",
+    "ichki_yunalish": "Node.js",
+    "format": "online",
+    "fullname": "John Doe",
+    "phone": "+998901200000",
+    "image": "78Smith.png"
+  },
+  {
+    "id": "0a14bd9b-219b-44ce-844d-f538e8c27ad8",
+    "date": "2023-01-30",
+    "time": "14:00",
+    "yunalish": "Information Technologies",
+    "ichki_yunalish": "Flutter",
+    "format": "offline",
+    "fullname": "Smith ",
+    "phone": "+998907001111",
+    "image": "78Smith.png"
+  },
+  {
+    "id": "bbf12038-621a-4882-9ce0-60a4cc27edde",
+    "date": "2023-01-30",
+    "time": "14:00",
+    "yunalish": "Information Technologies",
+    "ichki_yunalish": "Flutter",
+    "format": "offline",
+    "fullname": "Smith ",
+    "phone": "+998907001111",
+    "image": "78Smith.png"
+  },
+  {
+    "id": "dcc27dc1-cf3a-4c7d-9d55-230b6996d40f",
+    "date": "2023-01-30",
+    "time": "14:00",
+    "yunalish": "Information Technologies",
+    "ichki_yunalish": "Flutter",
+    "format": "offline",
+    "fullname": "Smith ",
+    "phone": "+998907001111",
+    "image": "78Smith.png"
+  }
 ]

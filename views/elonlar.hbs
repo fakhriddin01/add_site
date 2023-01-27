@@ -1,0 +1,25 @@
+{{#if elonlar.length}}
+<div class="row">
+    {{#each elonlar}}
+        <div class="col-4">
+        
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="{{image}}" alt="Card image" style="width:100%">
+            <div class="card-body">
+            <h4 class="card-title">{{fullname}}</h4>
+            <h4 class="card-title"> {{yunalish}}</h4>
+            <p class="card-text">{{ichki_yunalish}}</p>
+            <p class="card-text">{{fullname}}</p>
+            <p class="card-text"><span>{{date}}</span> <span>{{time}}</span></p>
+            <p class="card-text"><span>{{format}}</span> <span>{{phone}}</span></p>
+            </div>
+        </div>
+        </div>
+    {{/each}}
+        
+{{else}}
+    <h1>No Elonlar</h1>
+{{/if}}
+
+
+

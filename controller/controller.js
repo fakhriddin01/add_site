@@ -46,6 +46,13 @@ const Controller = {
         })
         await write_file('elonlar.json', elonlar);
         res.redirect('login')
+    },
+    ELONLAR: (req, res) => {
+        let elonlar = read_file('elonlar.json');
+        res.render('elonlar', {
+            title: "E'lonlar",
+            elonlar
+        })
     }
 }
 

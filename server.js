@@ -14,10 +14,10 @@ let port = process.env.PORT;
 
 const app = express();
 app.use(fileUpload());
-
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
+app.use(express.static('uploads'))
 app.use(router)
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
