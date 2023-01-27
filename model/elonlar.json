@@ -8,7 +8,8 @@
     "format": "online",
     "fullname": "Abd Fakh",
     "phone": "+998900",
-    "image": "78Smith.png"
+    "image": "78Smith.png",
+    "status": "kutilmoqda"
   },
   {
     "id": "a3c041a2-ac71-4594-9b45-5ca081d8e8de",
@@ -19,7 +20,8 @@
     "format": "online",
     "fullname": "John Doe",
     "phone": "+998901200000",
-    "image": "78Smith.png"
+    "image": "78Smith.png",
+    "status": "kutilmoqda"
   },
   {
     "id": "0a14bd9b-219b-44ce-844d-f538e8c27ad8",
@@ -30,7 +32,8 @@
     "format": "offline",
     "fullname": "Smith ",
     "phone": "+998907001111",
-    "image": "78Smith.png"
+    "image": "78Smith.png",
+    "status": "kutilmoqda"
   },
   {
     "id": "bbf12038-621a-4882-9ce0-60a4cc27edde",
@@ -41,7 +44,8 @@
     "format": "offline",
     "fullname": "Smith ",
     "phone": "+998907001111",
-    "image": "78Smith.png"
+    "image": "78Smith.png",
+    "status": "kutilmoqda"
   },
   {
     "id": "dcc27dc1-cf3a-4c7d-9d55-230b6996d40f",
@@ -52,6 +56,7 @@
     "format": "offline",
     "fullname": "Smith ",
     "phone": "+998907001111",
-    "image": "78Smith.png"
+    "image": "78Smith.png",
+    "status": "kutilmoqda"
   }
 ]

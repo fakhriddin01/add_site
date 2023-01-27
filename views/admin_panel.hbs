@@ -1,0 +1,15 @@
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Kutilmoqda</button>
+  <button type="button" class="btn btn-primary">Qabul qilingan</button>
+  <button type="button" class="btn btn-primary">Rad etilgan</button>
+</div>
+
+<p>Eng so'nggi habarnomalar</p>
+{{#each elonlar}}
+<span>{{yunalish}},{{ichki_yunalish}}</span> 
+<button type="button" class="btn btn-light"><a href="/bekor_qilish">Bekor qilish</a></button> 
+<button type="button" class="btn btn-primary"><a href="/tasdiqlash">Tasdiqlash</a></button>
+<br>
+<span>{{fullname}}</span> <span>{{phone}}</span> <span>{{date}}</span> <span>{{time}}</span>
+{{/each}}

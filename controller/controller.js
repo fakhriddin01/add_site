@@ -22,7 +22,6 @@ const Controller = {
 
         let fileName = (time.getMinutes()+time.getSeconds()+req.body.fullname).trim();
         let ext = (req.files.image.name).split('.').at(-1)
-        console.log(fileName+'.'+ext);
         fs.writeFile(`uploads/${fileName}.${ext}`, image, function(err){
             if (err) throw err;
         });
@@ -42,15 +41,42 @@ const Controller = {
             format: elon.optradio,
             fullname: elon.fullname,
             phone: elon.phone,
-            image: fileName+'.'+ext
+            image: fileName+'.'+ext,
+            status: "kutilmoqda"
         })
         await write_file('elonlar.json', elonlar);
-        res.redirect('login')
+        res.redirect('/elonlar')
     },
     ELONLAR: (req, res) => {
-        let elonlar = read_file('elonlar.json');
+        let elonlar = read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
         res.render('elonlar', {
             title: "E'lonlar",
+            elonlar
+        })
+    },
+    LOGIN_ADMIN: (req, res) => {
+        let admin = req.body;
+        let users = read_file('users.json');
+        let foundUser = users.find(u => {
+            if(u.login == admin.login && u.password == admin.password){
+                return u;
+            }
+        })
+        if(foundUser){
+            req.session.isAuthenticated = true
+            req.session.logedUser = foundUser;
+            res.redirect('/admin_panel');
+        }
+    },
+    LOGOUT: (req,res)=>{
+        req.session.destroy(()=>{
+            res.redirect('/elonlar')
+        })
+    },
+    LOAD_ADMIN_PANEL: (req, res)=> {
+        let elonlar = read_file('elonlar.json').filter(elon => elon.status == "kutilmoqda");
+        res.render('admin_panel', {
+            isAdminPanel: true,
             elonlar
         })
     }
