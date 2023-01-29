@@ -37,6 +37,7 @@ const Controller = {
             yunalish: yunalish,
             ichki_yunalish: ichki_yunalish,
             format: elon.optradio,
+            link: elon.link,
             fullname: elon.fullname,
             phone: elon.phone,
             image: fileName+'.'+ext,
@@ -49,6 +50,7 @@ const Controller = {
         let today = Date.now()
         
         let elonlar = read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan')
+        
         elonlar=elonlar.filter(elon => {
             let date_ = elon.date +" "+elon.time;
             let date =  new Date(date_);
@@ -56,6 +58,13 @@ const Controller = {
             if(date.getTime()>today){
                 return elon;
             }
+        })
+        elonlar.sort((a,b) => {
+            let date_a = a.date +" "+a.time;
+            let date_a_ms =  new Date(date_a);
+            let date_b = b.date +" "+b.time;
+            let date_b_ms =  new Date(date_b);
+            return date_a_ms - date_b_ms
         })
         res.render('elonlar', {
             title: "E'lonlar",
@@ -79,7 +88,10 @@ const Controller = {
             res.redirect('/admin_panel');
         }
         else{
-            res.redirect('/elonlar');
+            res.render('login', {
+                title: 'Login page',
+                msg: "Wrong login or password!"
+            })
         }
     },
     LOGOUT: (req,res)=>{

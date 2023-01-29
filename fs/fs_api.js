@@ -8,7 +8,6 @@ const read_file = (file_name) =>{
 const write_file = (file_name, data) => {
     return fs.writeFile(`./model/${file_name}`, JSON.stringify(data, null, 4), (err) => {
         if(err) throw err;
-        console.log('Created!');
     })
 
 } 

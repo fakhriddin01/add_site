@@ -82,5 +82,18 @@
         "phone": "+998990001111",
         "image": "1674924789756Name.png",
         "status": "tasdiqlangan"
+    },
+    {
+        "id": "9794b7c0-a801-4349-bb0e-47fd209df13e",
+        "date": "2023-02-01",
+        "time": "10:00",
+        "yunalish": "Grafik Dizayn",
+        "ichki_yunalish": "Photoshop",
+        "format": "online",
+        "link": "https://www.youtube.com/",
+        "fullname": "Super Dev",
+        "phone": "+998909991111",
+        "image": "1675008971171Super.png",
+        "status": "tasdiqlangan"
     }
 ]

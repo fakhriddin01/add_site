@@ -30,30 +30,31 @@
         <button type="submit" class="btn btn-info ml-3">Izlash</button>
     </form>
 </div>
-
-<h6>Oxirgi elonlar</h6>
+<div class="container">
+    <h6>Oxirgi elonlar</h6>
 {{#if elonlar.length}}
 <div class="row">
     {{#each elonlar}}
         <div class="col-3">
         
-        <div class="card" style="width:300px">
+        <div class="card mb-2 border border-primary" style="width:260px">
             <img class="card-img-top" src="{{image}}" alt="Card image" style="width:100%">
             <div class="card-body">
-            <h4 class="card-title">{{fullname}}</h4>
-            <h4 class="card-title"> {{yunalish}}</h4>
+            <h6 class="card-title">{{fullname}}</h6>
+            <h6 class="card-title"> {{yunalish}}</h6>
             <p class="card-text">{{ichki_yunalish}}</p>
-            <p class="card-text">{{fullname}}</p>
-            <p class="card-text"><span>{{date}}</span> <span>{{time}}</span></p>
-            <p class="card-text"><span>{{format}}</span> <span>{{phone}}</span></p>
+            <p class="card-text"><span>Kuni: {{date}};</span> <span> vaqti: {{time}}</span></p>
+            <p class="card-text"><span>Formati: {{format}}</span> <span>{{link}}</span></p>
             </div>
         </div>
         </div>
     {{/each}}
         
-{{else}}
-    <h1>E'lonlar yo'q</h1>
-{{/if}}
+    {{else}}
+        <h1>E'lonlar yo'q</h1>
+    {{/if}}
+</div>
+
 
 
 

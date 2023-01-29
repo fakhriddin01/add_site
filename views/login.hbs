@@ -10,6 +10,7 @@
         <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password" id="pwd">
         </div>
+        {{#if msg}} <p class="text-danger">{{msg}}</p>{{/if}}
         
         <button type="submit" class="btn btn-primary mx-auto">Kirish</button>
         </form>
