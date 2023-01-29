@@ -1,7 +1,7 @@
 const {read_file, write_file} = require('../fs/fs_api');
 const {uuid} = require('uuidv4');
 const fs = require('fs');
-
+const jwt = require('jsonwebtoken');
 
 const Controller = {
     OPEN_LOGIN: (req, res)=>{
@@ -15,12 +15,10 @@ const Controller = {
         })
     }, 
     SENT_ELON: async(req, res) =>{
-
-        console.log(req.files.image.data);
         var image = req.files.image.data;
-        let time = new Date()
 
-        let fileName = (time.getMinutes()+time.getSeconds()+req.body.fullname).trim();
+        let time = new Date()
+        let fileName = Date.now()+req.body.fullname.split(' ')[0];
         let ext = (req.files.image.name).split('.').at(-1)
         fs.writeFile(`uploads/${fileName}.${ext}`, image, function(err){
             if (err) throw err;
@@ -29,7 +27,7 @@ const Controller = {
         let elon = req.body
         let elonlar = read_file('elonlar.json');
         let yunalishlar = ["Information Technologies", "Grafik Dizayn", "SMM"]
-        let sub_yunalishlar = [["Node.js", "Python", "Flutter"], ["Grafik pro", "Adobe illustrator", "Photoshop"], ["SMM","Marketing"]]
+        let sub_yunalishlar = [["Node.js", "Python", "Flutter", "Java"], ["Grafik pro", "Adobe illustrator", "Photoshop"], ["SMM","Marketing"]]
         yunalish = yunalishlar[elon.yunalish]
         ichki_yunalish = sub_yunalishlar[elon.yunalish][elon.ichki_yunalish[elon.yunalish]]
         elonlar.push({
@@ -48,13 +46,23 @@ const Controller = {
         res.redirect('/elonlar')
     },
     ELONLAR: (req, res) => {
-        let elonlar = read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
+        let today = Date.now()
+        
+        let elonlar = read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan')
+        elonlar=elonlar.filter(elon => {
+            let date_ = elon.date +" "+elon.time;
+            let date =  new Date(date_);
+            
+            if(date.getTime()>today){
+                return elon;
+            }
+        })
         res.render('elonlar', {
             title: "E'lonlar",
             elonlar
         })
     },
-    LOGIN_ADMIN: (req, res) => {
+    LOGIN_ADMIN: async(req, res) => {
         let admin = req.body;
         let users = read_file('users.json');
         let foundUser = users.find(u => {
@@ -64,8 +72,14 @@ const Controller = {
         })
         if(foundUser){
             req.session.isAuthenticated = true
-            req.session.logedUser = foundUser;
+            let token =  jwt.sign({id: foundUser.id, adminName: foundUser.adminName}, process.env.SECRET_KEY, {
+                expiresIn: "30m"
+            })
+            req.session.token = token;
             res.redirect('/admin_panel');
+        }
+        else{
+            res.redirect('/elonlar');
         }
     },
     LOGOUT: (req,res)=>{
@@ -77,8 +91,72 @@ const Controller = {
         let elonlar = read_file('elonlar.json').filter(elon => elon.status == "kutilmoqda");
         res.render('admin_panel', {
             isAdminPanel: true,
+            elonlar,
+            kutilmoqda: true
+        })
+    },
+    TASDIQLASH: async(req, res) => {
+        let id = req.params.id;
+        let elonlar = read_file('elonlar.json')
+        elonlar.forEach(elon => {
+            if(elon.id == id){
+                elon.status = "tasdiqlangan"
+            }
+        });
+        await write_file('elonlar.json', elonlar);
+        res.redirect('/admin_panel')
+    },
+    BEKOR_QILISH: async(req, res) => {
+        let id = req.params.id;
+        let elonlar = read_file('elonlar.json')
+        elonlar.forEach(elon => {
+            if(elon.id == id){
+                elon.status = "rad etilgan"
+            }
+        });
+        await write_file('elonlar.json', elonlar);
+        res.redirect('/admin_panel')
+    },
+    LOAD_ADMIN_PANEL_QABUL: (req, res)=> {
+        let elonlar = read_file('elonlar.json').filter(elon => elon.status == "tasdiqlangan");
+        res.render('admin_panel', {
+            isAdminPanel: true,
+            elonlar,
+            qabul: true
+        })
+    },
+    LOAD_ADMIN_PANEL_RAD: (req, res)=> {
+        let elonlar = read_file('elonlar.json').filter(elon => elon.status == "rad etilgan");
+        res.render('admin_panel', {
+            isAdminPanel: true,
+            elonlar,
+            rad: true
+        })
+    },
+    FILTER_ELONLAR: (req, res) =>{
+        let {date, format, fullname, yunalish} = req.body;
+        let elonlar=read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
+        if(date != ""){
+            elonlar = elonlar.filter(elon => elon.date == date);
+        }
+        if(format){
+            elonlar = elonlar.filter(elon => elon.format == format);
+        }
+        if(yunalish){
+            elonlar = elonlar.filter(elon => elon.yunalish == yunalish);
+        }
+        if(fullname != ""){
+            elonlar = elonlar.filter(elon => {
+                if(elon.fullname.toLowerCase().includes(fullname.toLowerCase())){
+                    return elon
+                }
+            });
+        }
+        res.render('elonlar', {
+            title: "E'lonlar",
             elonlar
         })
+
     }
 }
 

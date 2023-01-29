@@ -40,6 +40,7 @@
                     <option value="0">Node.js</option>
                     <option value="1">Python</option>
                     <option value="2">Flutter</option>
+                    <option value="3">Java</option>
                 </select>
 
                 <select class="form-control" id="ichki_yunalish" name="ichki_yunalish">
@@ -83,7 +84,7 @@
         <h5 class="mt-4">Post</h5>
 
         <input type="file" class="form-control-file border" required="true" name="image">
-
+        {{#if msg}} <p class="text-danger">{{msg}}</p>{{/if}}
         <button type="submit" class="btn btn-primary mt-4">Submit</button>
         </form>
     </div>

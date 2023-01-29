@@ -1,15 +1,47 @@
+<div class="container-fluid">
 
-<div class="btn-group">
-  <button type="button" class="btn btn-primary">Kutilmoqda</button>
-  <button type="button" class="btn btn-primary">Qabul qilingan</button>
-  <button type="button" class="btn btn-primary">Rad etilgan</button>
+    
+    
+<div class="d-flex">
+    <div class="bg-primary" style="width: 110px; height: 750px; margin-left:-15px; position:fixed">
+        <div class="d-flex flex-column">
+            <a class="navbar-brand text-white mx-auto mt-2 font-weight-bold" href="/elonlar"> E'lonlar</a>
+            <a class="navbar-brand text-white mx-auto mt-5" href="/elonlar" style="font-size: 12px;"><i class="fa fa-home" aria-hidden="true"></i> Home page</a>
+            <a class="navbar-brand text-white mx-auto" href="/logout" style="font-size: 12px;"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Chiqish</a>
+           
+        </div>
+    </div>
+    
+    
+    <div class="flex-grow-1" style="margin-left: 110px;">
+        <div class="d-flex flex-row-reverse">
+            <div class="mt-2 d-flex flex-column" ><span>{{token.adminName}}</span> <span>id:{{token.id}}</span></div>
+            <div class="mr-2"><img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle float mt-2" style="width: 50px;" alt="Avatar" /></div>
+        </div>
+         <hr/>
+        <div class="btn-group mb-1">
+            <a href="/admin_panel"><button type="button" class="btn btn-outline-primary mr-3 {{#if kutilmoqda}} active {{/if}}" >Kutilmoqda</button></a>
+            <a href="/admin_panel/qabul_qilinganlar"><button type="button" class="btn btn-outline-primary mr-3 {{#if qabul}} active {{/if}}">Qabul qilingan</button></a>
+            <a href="/admin_panel/rad_etilgan"><button type="button" class="btn btn-outline-primary {{#if rad}} active {{/if}}">Rad etilgan</button></a>
+        </div>
+         <hr/>
+
+        <p>Eng so'nggi habarnomalar</p>
+        {{#each elonlar}}
+        <div class="w-50 mb-3">
+        <span class="font-weight-bold">{{yunalish}},{{ichki_yunalish}}</span> 
+        <button type="button" class="btn btn-light float-right"><a href="/bekor_qilish/{{id}}">Bekor qilish</a></button> 
+        <button type="button" class="btn btn-primary float-right"><a href="/tasdiqlash/{{id}}" class="text-white">Tasdiqlash</a></button>
+        <br>
+        <div class="d-flex w-75">
+        <div class="small w-25">{{fullname}}</div> <div class="text-info small w-25">{{phone}}</div> <div class="text-info small w-25">{{date}}</div> <div class=" text-info small w-25">{{time}}</div>
+        </div>
+        <hr/>
+        </div>
+        {{/each}}
+    </div>
+
+    
 </div>
 
-<p>Eng so'nggi habarnomalar</p>
-{{#each elonlar}}
-<span>{{yunalish}},{{ichki_yunalish}}</span> 
-<button type="button" class="btn btn-light"><a href="/bekor_qilish">Bekor qilish</a></button> 
-<button type="button" class="btn btn-primary"><a href="/tasdiqlash">Tasdiqlash</a></button>
-<br>
-<span>{{fullname}}</span> <span>{{phone}}</span> <span>{{date}}</span> <span>{{time}}</span>
-{{/each}}
+</div>

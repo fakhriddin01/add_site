@@ -2,6 +2,7 @@
   {
     "id": 1,
     "login": "admin",
+    "adminName": "John Doe",
     "password": "123456"
   }
 ]

@@ -1,9 +1,43 @@
+<div class="bg-primary mb-5 d-flex flex-wrap align-content-end justify-content-center" style="height: 60px;">
+    <form class="form-inline mb-n3" action="/filter_elonlar" method="POST">
+        <div class="form-group-inline ml-3">
+            <input type="date" class="form-control" name="date" id="date">
+        </div>
+        <div class="form-group-inline ml-3">
+            
+                <select class="form-control masterSelect" id="yunalish" name="yunalish">
+                    <option value="" hidden disabled selected>Yo'nalishni tanlang </option>
+                    <option value="Information Technologies">Information Technologies</option>
+                    <option value="Grafik Dizayn">Grafik Design</option>
+                    <option value="SMM">SMM</option>
+                    <option value="">Hammasi</option>
+                </select>
+        </div>
+        <div class="form-group-inline ml-3">
+            
+                <select class="form-control masterSelect" id="yunalish" name="format">
+                    <option value="" hidden disabled selected>Formatni tanlang</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                    <option value="">Hammasi</option>
+                </select>
+        </div>
+
+        <div class="form-group-inline ml-3">
+            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Ism familiya">
+        </div>
+      
+        <button type="submit" class="btn btn-info ml-3">Izlash</button>
+    </form>
+</div>
+
+<h6>Oxirgi elonlar</h6>
 {{#if elonlar.length}}
 <div class="row">
     {{#each elonlar}}
-        <div class="col-4">
+        <div class="col-3">
         
-        <div class="card" style="width:400px">
+        <div class="card" style="width:300px">
             <img class="card-img-top" src="{{image}}" alt="Card image" style="width:100%">
             <div class="card-body">
             <h4 class="card-title">{{fullname}}</h4>
@@ -18,7 +52,7 @@
     {{/each}}
         
 {{else}}
-    <h1>No Elonlar</h1>
+    <h1>E'lonlar yo'q</h1>
 {{/if}}
 
 
