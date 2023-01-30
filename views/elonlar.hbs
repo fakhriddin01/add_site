@@ -23,9 +23,24 @@
                 </select>
         </div>
 
-        <div class="form-group-inline ml-3">
+        {{!-- <div class="form-group-inline ml-3">
             <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Ism familiya">
-        </div>
+        </div> --}}
+
+        <div class="dropdown ml-3">
+            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                Ism Sharif
+            </button>
+            {{#if authors.length}}
+                <div class="dropdown-menu">
+            {{#each authors}}
+               
+                <input type="checkbox" id="fullname" style="display: inline-block;" name="fullname[]" value="{{this}}">{{this}} <br>
+                    
+            {{/each}}
+                </div> 
+            {{/if}}
+        </div>  
       
         <button type="submit" class="btn btn-info ml-3">Izlash</button>
     </form>

@@ -1,7 +1,7 @@
 [
     {
         "id": "382dd2f2-1673-49d1-8774-cf599956c0cb",
-        "date": "2023-01-29",
+        "date": "2023-01-31",
         "time": "15:00",
         "yunalish": "Information Technologies",
         "ichki_yunalish": "Node.js",
@@ -14,7 +14,7 @@
     {
         "id": "6c2d60ad-e04e-41f5-8982-a6ba8eaf949a",
         "date": "2023-01-30",
-        "time": "14:00",
+        "time": "20:00",
         "yunalish": "Information Technologies",
         "ichki_yunalish": "Flutter",
         "format": "online",
@@ -25,7 +25,7 @@
     },
     {
         "id": "c61ea643-fbb2-405c-9c76-48f910a32c56",
-        "date": "2023-01-30",
+        "date": "2023-01-31",
         "time": "14:00",
         "yunalish": "Grafik Dizayn",
         "ichki_yunalish": "Adobe illustrator",
@@ -94,6 +94,19 @@
         "fullname": "Super Dev",
         "phone": "+998909991111",
         "image": "1675008971171Super.png",
+        "status": "tasdiqlangan"
+    },
+    {
+        "id": "0101d35d-bd9e-46d0-986f-17196a3d0711",
+        "date": "2023-02-01",
+        "time": "10:00",
+        "yunalish": "SMM",
+        "ichki_yunalish": "Marketing",
+        "format": "online",
+        "link": "https://youtube.com/najottalim",
+        "fullname": "SuperMarketolog",
+        "phone": "+998977777777",
+        "image": "1675078469852SuperMarketolog.png",
         "status": "tasdiqlangan"
     }
 ]

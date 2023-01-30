@@ -50,7 +50,8 @@ const Controller = {
         let today = Date.now()
         
         let elonlar = read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan')
-        
+        let authors = [];
+
         elonlar=elonlar.filter(elon => {
             let date_ = elon.date +" "+elon.time;
             let date =  new Date(date_);
@@ -59,6 +60,13 @@ const Controller = {
                 return elon;
             }
         })
+
+        elonlar.forEach(elon => {
+            if(!authors.includes(elon.fullname)){
+                authors.push(elon.fullname);
+            }
+        })
+
         elonlar.sort((a,b) => {
             let date_a = a.date +" "+a.time;
             let date_a_ms =  new Date(date_a);
@@ -68,7 +76,8 @@ const Controller = {
         })
         res.render('elonlar', {
             title: "E'lonlar",
-            elonlar
+            elonlar,
+            authors
         })
     },
     LOGIN_ADMIN: async(req, res) => {
@@ -146,7 +155,10 @@ const Controller = {
         })
     },
     FILTER_ELONLAR: (req, res) =>{
+
         let {date, format, fullname, yunalish} = req.body;
+
+
         let elonlar=read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
         if(date != ""){
             elonlar = elonlar.filter(elon => elon.date == date);
@@ -157,16 +169,28 @@ const Controller = {
         if(yunalish){
             elonlar = elonlar.filter(elon => elon.yunalish == yunalish);
         }
-        if(fullname != ""){
-            elonlar = elonlar.filter(elon => {
-                if(elon.fullname.toLowerCase().includes(fullname.toLowerCase())){
-                    return elon
-                }
-            });
+
+        if(fullname){
+            fullname.forEach(name => {
+                elonlar = elonlar.filter(elon => {
+                    if(elon.fullname == name){
+                        return elon
+                    }
+                })
+            })
+          
         }
+
+        let authors =[]
+        elonlar.forEach(elon => {
+            if(!authors.includes(elon.fullname)){
+                authors.push(elon.fullname);
+            }
+        })
         res.render('elonlar', {
             title: "E'lonlar",
-            elonlar
+            elonlar,
+            authors
         })
 
     }
