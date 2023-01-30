@@ -108,5 +108,18 @@
         "phone": "+998977777777",
         "image": "1675078469852SuperMarketolog.png",
         "status": "tasdiqlangan"
+    },
+    {
+        "id": "3be81d06-bc12-4445-a215-fe2a88f62e9e",
+        "date": "2023-02-03",
+        "time": "08:00",
+        "yunalish": "SMM",
+        "ichki_yunalish": "SMM",
+        "format": "offline",
+        "link": "",
+        "fullname": "White Snow",
+        "phone": "+998901112222",
+        "image": "1675102675482White.png",
+        "status": "kutilmoqda"
     }
 ]

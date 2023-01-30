@@ -3,16 +3,41 @@
         <div class="form-group-inline ml-3">
             <input type="date" class="form-control" name="date" id="date">
         </div>
-        <div class="form-group-inline ml-3">
+
+        <div class="dropdown ml-3">
+            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                Yo'nalish
+            </button>
+                <div class="dropdown-menu" style="width: 200px;">
+                       
+                    <input type="checkbox" id="myCheck1" onclick="myFunction1()" style="display: inline-block;" name="yunalish[]" value="Information Technologies">Information Technologies <br>
+                   
+                        <div id="text1" style="display: none; margin-left: 20px; font-size: small">
+                            {{#each IT}}
+                                <input type="checkbox" style="display: inline-block;" name="ichki_yunalish[]" value="{{this}}">{{this}} <br>
+                            {{/each}}
+                        </div>
+
+                    <input type="checkbox" id="myCheck2" onclick="myFunction2()" style="display: inline-block;" name="yunalish[]" value="Grafik Dizayn">Grafik Dizayn <br>
+                
+                    <div id="text2" style="display: none; margin-left: 20px; font-size: small">
+                        {{#each GD}}
+                            <input type="checkbox" style="display: inline-block;" name="ichki_yunalish[]" value="{{this}}">{{this}} <br>
+                        {{/each}}
+                    </div>
+
+                    <input type="checkbox" id="myCheck3" onclick="myFunction3()" style="display: inline-block;" name="yunalish[]" value="SMM">SMM <br>
+                
+                    <div id="text3" style="display: none; margin-left: 20px; font-size: small">
+                        {{#each SMM}}
+                            <input type="checkbox" style="display: inline-block;" name="ichki_yunalish[]" value="{{this}}">{{this}} <br>
+                        {{/each}}
+                    </div>
             
-                <select class="form-control masterSelect" id="yunalish" name="yunalish">
-                    <option value="" hidden disabled selected>Yo'nalishni tanlang </option>
-                    <option value="Information Technologies">Information Technologies</option>
-                    <option value="Grafik Dizayn">Grafik Design</option>
-                    <option value="SMM">SMM</option>
-                    <option value="">Hammasi</option>
-                </select>
-        </div>
+                </div> 
+          
+        </div> 
+
         <div class="form-group-inline ml-3">
             
                 <select class="form-control masterSelect" id="yunalish" name="format">
@@ -23,16 +48,13 @@
                 </select>
         </div>
 
-        {{!-- <div class="form-group-inline ml-3">
-            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Ism familiya">
-        </div> --}}
 
         <div class="dropdown ml-3">
             <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
                 Ism Sharif
             </button>
             {{#if authors.length}}
-                <div class="dropdown-menu">
+                <div class="dropdown-menu" style="width: 200px;">
             {{#each authors}}
                
                 <input type="checkbox" id="fullname" style="display: inline-block;" name="fullname[]" value="{{this}}">{{this}} <br>

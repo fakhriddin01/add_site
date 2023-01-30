@@ -6,10 +6,13 @@ const fileUpload = require('express-fileupload');
 const session=require('express-session')
 const session_variables = require('./middleware/variables')
 
+
 const hbs = exphbs.create({
     defaultLayout: "main",
     extname: "hbs"
 })
+
+
 
 dotenv.config();
 let port = process.env.PORT;
@@ -27,6 +30,17 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+hbs.handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
+    if (arguments.length < 3)
+        throw new Error("Handlebars Helper equal needs 2 parameters");
+    if( lvalue!=rvalue ) {
+        return options.inverse(this);
+    } else {
+        return options.fn(this);
+    }
+});
+
 app.use(session_variables)
 app.use(router)
 

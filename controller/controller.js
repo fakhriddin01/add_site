@@ -2,7 +2,9 @@ const {read_file, write_file} = require('../fs/fs_api');
 const {uuid} = require('uuidv4');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
-
+let IT = ["Node.js", "Python", "Flutter", "Java"]
+let GD = ["Grafik pro", "Adobe illustrator", "Photoshop"]
+let SMM = ["SMM","Marketing"]
 const Controller = {
     OPEN_LOGIN: (req, res)=>{
         res.render('login', {
@@ -27,7 +29,7 @@ const Controller = {
         let elon = req.body
         let elonlar = read_file('elonlar.json');
         let yunalishlar = ["Information Technologies", "Grafik Dizayn", "SMM"]
-        let sub_yunalishlar = [["Node.js", "Python", "Flutter", "Java"], ["Grafik pro", "Adobe illustrator", "Photoshop"], ["SMM","Marketing"]]
+        let sub_yunalishlar = [IT, GD, SMM]
         yunalish = yunalishlar[elon.yunalish]
         ichki_yunalish = sub_yunalishlar[elon.yunalish][elon.ichki_yunalish[elon.yunalish]]
         elonlar.push({
@@ -51,7 +53,8 @@ const Controller = {
         
         let elonlar = read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan')
         let authors = [];
-
+        let yunalish = [];
+        let ichki_yunalish = [];
         elonlar=elonlar.filter(elon => {
             let date_ = elon.date +" "+elon.time;
             let date =  new Date(date_);
@@ -65,6 +68,12 @@ const Controller = {
             if(!authors.includes(elon.fullname)){
                 authors.push(elon.fullname);
             }
+            if(!yunalish.includes(elon.yunalish)){
+                yunalish.push(elon.yunalish);
+            }
+            if(!ichki_yunalish.includes(elon.ichki_yunalish)){
+                ichki_yunalish.push(elon.ichki_yunalish);
+            }
         })
 
         elonlar.sort((a,b) => {
@@ -77,7 +86,11 @@ const Controller = {
         res.render('elonlar', {
             title: "E'lonlar",
             elonlar,
-            authors
+            authors,
+            yunalish,
+            IT,
+            GD,
+            SMM
         })
     },
     LOGIN_ADMIN: async(req, res) => {
@@ -91,7 +104,7 @@ const Controller = {
         if(foundUser){
             req.session.isAuthenticated = true
             let token =  jwt.sign({id: foundUser.id, adminName: foundUser.adminName}, process.env.SECRET_KEY, {
-                expiresIn: "30m"
+                expiresIn: "30s"
             })
             req.session.token = token;
             res.redirect('/admin_panel');
@@ -156,10 +169,17 @@ const Controller = {
     },
     FILTER_ELONLAR: (req, res) =>{
 
-        let {date, format, fullname, yunalish} = req.body;
-
+        let {date, format, fullname, yunalish, ichki_yunalish} = req.body;
 
         let elonlar=read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
+        
+        let authors =[]
+        elonlar.forEach(elon => {
+            if(!authors.includes(elon.fullname)){
+                authors.push(elon.fullname);
+            }
+        })
+
         if(date != ""){
             elonlar = elonlar.filter(elon => elon.date == date);
         }
@@ -167,30 +187,38 @@ const Controller = {
             elonlar = elonlar.filter(elon => elon.format == format);
         }
         if(yunalish){
-            elonlar = elonlar.filter(elon => elon.yunalish == yunalish);
+           elonlar = elonlar.filter(elon => {
+            if(yunalish.includes(elon.yunalish)){
+                return elon;
+            }
+           })
+        }
+
+        if(ichki_yunalish){
+            elonlar = elonlar.filter(elon => {
+                if(ichki_yunalish.includes(elon.ichki_yunalish)){
+                    return elon;
+                }
+            })
         }
 
         if(fullname){
-            fullname.forEach(name => {
-                elonlar = elonlar.filter(elon => {
-                    if(elon.fullname == name){
-                        return elon
-                    }
-                })
+            elonlar = elonlar.filter(elon => {
+                if(fullname.includes(elon.fullname)){
+                    return elon;
+                }
             })
-          
         }
-
-        let authors =[]
-        elonlar.forEach(elon => {
-            if(!authors.includes(elon.fullname)){
-                authors.push(elon.fullname);
-            }
-        })
+        
+        
+        
         res.render('elonlar', {
             title: "E'lonlar",
             elonlar,
-            authors
+            authors,
+            IT,
+            GD,
+            SMM
         })
 
     }

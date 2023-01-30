@@ -4,12 +4,14 @@ module.exports = function(req, res, next){
                 title: "E'lon berish",
                 msg: "Please choose correct image format!!!"
             })
+            return
         }
         if(req.files.image.size > 5*1024*1024){
             res.render('elon_berish', {
                 title: "E'lon berish",
                 msg: "Image size must be less then 5Mb !!!"
             })
+            return
         }
     next()
 }
