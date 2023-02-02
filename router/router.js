@@ -2,13 +2,15 @@ const express = require('express')
 const controller = require('../controller/controller')
 const token = require('../middleware/token')
 const image_validation = require('../middleware/image_validation')
+const {validate} = require('../middleware/validation')
+
 
 let router = express.Router()
 
 router
     .get('/login', controller.OPEN_LOGIN)
     .get('/elon_berish',  controller.OPEN_ELON_BERISH)
-    .post('/adminga_elon_yuborish', image_validation, controller.SENT_ELON)
+    .post('/adminga_elon_yuborish', validate, image_validation, controller.SENT_ELON)
     .get('/elonlar', controller.ELONLAR)
     .get('/', controller.ELONLAR)
     .post('/login_admin',  controller.LOGIN_ADMIN)
@@ -21,3 +23,4 @@ router
     .post('/filter_elonlar', controller.FILTER_ELONLAR)
 
 module.exports=router;
+

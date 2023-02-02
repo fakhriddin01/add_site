@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 let IT = ["Node.js", "Python", "Flutter", "Java"]
 let GD = ["Grafik pro", "Adobe illustrator", "Photoshop"]
 let SMM = ["SMM","Marketing"]
+
+
 const Controller = {
     OPEN_LOGIN: (req, res)=>{
         res.render('login', {
@@ -19,7 +21,7 @@ const Controller = {
     SENT_ELON: async(req, res) =>{
         var image = req.files.image.data;
 
-        let time = new Date()
+        let times = new Date()
         let fileName = Date.now()+req.body.fullname.split(' ')[0];
         let ext = (req.files.image.name).split('.').at(-1)
         fs.writeFile(`uploads/${fileName}.${ext}`, image, function(err){
@@ -27,6 +29,14 @@ const Controller = {
         });
        
         let elon = req.body
+
+        let {date} = req.body
+
+        let result = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(date);
+        if(!result){
+            return res.status(400).json({msg: "please input correct date as per format YYYY-MM-DD"});
+        }
+        
         let elonlar = read_file('elonlar.json');
         let yunalishlar = ["Information Technologies", "Grafik Dizayn", "SMM"]
         let sub_yunalishlar = [IT, GD, SMM]
@@ -50,7 +60,13 @@ const Controller = {
     },
     ELONLAR: (req, res) => {
         let today = Date.now()
-        
+        let isElon = true;
+        let page_number;  
+        if(!Object.values(req.query)[0]){
+            page_number=1
+        }else{
+            page_number=Object.values(req.query)[0];
+        }   
         let elonlar = read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan')
         let authors = [];
         let yunalish = [];
@@ -75,7 +91,9 @@ const Controller = {
                 ichki_yunalish.push(elon.ichki_yunalish);
             }
         })
+     
 
+        
         elonlar.sort((a,b) => {
             let date_a = a.date +" "+a.time;
             let date_a_ms =  new Date(date_a);
@@ -83,6 +101,11 @@ const Controller = {
             let date_b_ms =  new Date(date_b);
             return date_a_ms - date_b_ms
         })
+
+        let page_size=4
+        let pageCount = Math.ceil(elonlar.length/page_size);
+        elonlar = paginate(elonlar, page_size, page_number);
+        
         res.render('elonlar', {
             title: "E'lonlar",
             elonlar,
@@ -90,7 +113,12 @@ const Controller = {
             yunalish,
             IT,
             GD,
-            SMM
+            SMM,
+            pagination: {
+                page: page_number,
+                pageCount: pageCount
+            },
+            isElon
         })
     },
     LOGIN_ADMIN: async(req, res) => {
@@ -104,7 +132,7 @@ const Controller = {
         if(foundUser){
             req.session.isAuthenticated = true
             let token =  jwt.sign({id: foundUser.id, adminName: foundUser.adminName}, process.env.SECRET_KEY, {
-                expiresIn: "30s"
+                expiresIn: "30m"
             })
             req.session.token = token;
             res.redirect('/admin_panel');
@@ -168,18 +196,27 @@ const Controller = {
         })
     },
     FILTER_ELONLAR: (req, res) =>{
+        // let isFilter = true;
+        // let page_number;  
+        // if(!Object.values(req.query)[0]){
+        //     page_number=1
+        // }else{
+        //     page_number=Object.values(req.query)[0];
+        // }   
 
         let {date, format, fullname, yunalish, ichki_yunalish} = req.body;
-
-        let elonlar=read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
         
+        
+        let elonlar=read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
+
         let authors =[]
         elonlar.forEach(elon => {
             if(!authors.includes(elon.fullname)){
                 authors.push(elon.fullname);
             }
         })
-
+        
+     
         if(date != ""){
             elonlar = elonlar.filter(elon => elon.date == date);
         }
@@ -209,19 +246,82 @@ const Controller = {
                 }
             })
         }
+        // req.session.elonlar=elonlar;
+        // console.log(res.session.elonlar);
         
+        // let page_size=4
         
-        
+        // let pageCount = Math.ceil(elonlar.length/page_size);
+
+        // elonlar = paginate(elonlar, page_size, page_number);
+
         res.render('elonlar', {
             title: "E'lonlar",
             elonlar,
             authors,
             IT,
             GD,
-            SMM
+            SMM,
+            // pagination: {
+            //     page: page_number,
+            //     pageCount: pageCount
+            // },
+            // isFilter
         })
 
     }
+    // FILTER_ELONLAR_PAGE: (req, res) =>{
+    //     let isFilter = true
+    //     let page = req.path.slice(-1)
+      
+    //     console.log(page[0]);
+
+    //     // let {date, format, fullname, yunalish, ichki_yunalish} = req.body;
+        
+
+
+    //     let elonlar_auth=read_file('elonlar.json').filter(elon => elon.status == 'tasdiqlangan');
+
+    //     let authors =[]
+    //     elonlar_auth.forEach(elon => {
+    //         if(!authors.includes(elon.fullname)){
+    //             authors.push(elon.fullname);
+    //         }
+    //     })
+    //     // console.log(req.session.elonlar);
+    //     let elonlar=[]
+    //     if(req.session.elonlar){
+    //         elonlar=req.session.elonlar;
+    //     }
+    //     let page_size=4
+        
+    //     let pageCount = Math.ceil(elonlar.length/page_size);
+        
+    //     elonlar = paginate(elonlar, page_size, page);
+        
+       
+    //     res.render('elonlar', {
+    //         title: "E'lonlar",
+    //         elonlar,
+    //         authors,
+    //         IT,
+    //         GD,
+    //         SMM,
+    //         pagination: {
+    //             page: page,
+    //             pageCount: pageCount
+    //         },
+    //         isFilter
+    //     })
+
+    // }
+
+    
+}
+
+function paginate(array, page_size, page_number) {
+    return  array.slice((page_number - 1) * page_size, page_number * page_size);
+    
 }
 
 module.exports = Controller;

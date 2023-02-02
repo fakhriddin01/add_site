@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const exphbs = require('express-handlebars')
+
 const router = require('./router/router')
 const fileUpload = require('express-fileupload');
 const session=require('express-session')
@@ -31,9 +32,11 @@ app.use(session({
     saveUninitialized: false
 }))
 
+hbs.handlebars.registerHelper('paginate', require('handlebars-paginate'));
+
 hbs.handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
-        throw new Error("Handlebars Helper equal needs 2 parameters");
+    throw new Error("Handlebars Helper equal needs 2 parameters");
     if( lvalue!=rvalue ) {
         return options.inverse(this);
     } else {
@@ -41,8 +44,12 @@ hbs.handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
     }
 });
 
+
+
 app.use(session_variables)
+
 app.use(router)
+
 
 
 app.listen(port, ()=>{

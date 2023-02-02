@@ -1,7 +1,7 @@
-<div class="bg-primary mb-5 d-flex flex-wrap align-content-end justify-content-center" style="height: 60px;">
+<div class="bg-primary mb-5 d-flex flex-wrap align-content-end justify-content-center" style="height: 50px;">
     <form class="form-inline mb-n3" action="/filter_elonlar" method="POST">
         <div class="form-group-inline ml-3">
-            <input type="date" class="form-control" name="date" id="date">
+            <input type="date" class="form-control" name="date" id="date" placeholder="yyyy-mm-dd">
         </div>
 
         <div class="dropdown ml-3">
@@ -70,18 +70,18 @@
 <div class="container">
     <h6>Oxirgi elonlar</h6>
 {{#if elonlar.length}}
-<div class="row">
+<div class="row d-flex justify-content-around align-items-center">
     {{#each elonlar}}
         <div class="col-3">
         
-        <div class="card mb-2 border border-primary" style="width:260px">
+        <div class="card mb-2 border border-primary" style="width:260px; height: 460px">
             <img class="card-img-top" src="{{image}}" alt="Card image" style="width:100%">
             <div class="card-body">
-            <h6 class="card-title">{{fullname}}</h6>
-            <h6 class="card-title"> {{yunalish}}</h6>
-            <p class="card-text">{{ichki_yunalish}}</p>
-            <p class="card-text"><span>Kuni: {{date}};</span> <span> vaqti: {{time}}</span></p>
-            <p class="card-text"><span>Formati: {{format}}</span> <span>{{link}}</span></p>
+            <h6 class="card-title mt-1 mb-1">{{fullname}}</h6>
+            <h6 class="card-title mt-1 mb-1"> {{yunalish}}</h6>
+            <p class="card-text mt-1 mb-1">{{ichki_yunalish}}</p>
+            <p class="card-text mt-1 mb-1"><span>Kuni: {{date}};</span> <span> vaqti: {{time}}</span></p>
+            <p class="card-text mt-1 mb-1"><span>Formati: {{format}}</span> <span>{{link}}</span></p>
             </div>
         </div>
         </div>
@@ -92,6 +92,39 @@
     {{/if}}
 </div>
 
+{{#if isElon}}
+<div class="d-flex justify-content-center mt-3 mb-5">
+  <ul class="list-group list-group-horizontal text-dark">
+ 
+    {{#paginate pagination type="previous"}}
+      <li  class="list-group-item  {{#if disabled}} disabled {{/if}}"><a href="?p={{n}}">Prev</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="middle" limit="7"}}
+      <li  class="list-group-item {{#if active}} bg-secondary {{/if}}"><a href="?p={{n}}">{{n}}</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="next"}}
+      <li  class="list-group-item  {{#if disabled}} disabled {{/if}}"><a href="?p={{n}}">Next</a></li>
+    {{/paginate}}
 
+  </ul>
+</div>
+{{/if}}
 
+{{!-- {{#if isFilter}}
+<div class="d-flex justify-content-center mt-5 mb-5">
+  <ul class="list-group list-group-horizontal text-dark">
+ 
+    {{#paginate pagination type="previous"}}
+      <li  class="list-group-item  {{#if disabled}} disabled {{/if}}"><a href="/filter_elonlar/:{{n}}">Prev</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="middle" limit="7"}}
+      <li  class="list-group-item {{#if active}} bg-secondary {{/if}}"><a href="/filter_elonlar/:{{n}}">{{n}}</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="next"}}
+      <li  class="list-group-item  {{#if disabled}} disabled {{/if}}"><a href="/filter_elonlar/:{{n}}">Next</a></li>
+    {{/paginate}}
+
+  </ul>
+</div>
+{{/if}} --}}
 
